@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://40ic3523l1qr"]
+
+[ext_resource type="Texture2D" uid="uid://bt1py62604kql" path="res://assets/football ball.jpg" id="1_lvapt"]
+[ext_resource type="Script" uid="uid://f4ahomshgc5f" path="res://Scripts/finishing_line.gd" id="2_hx1wo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx1wo"]
+albedo_texture = ExtResource("1_lvapt")
+
+[sub_resource type="SphereMesh" id="SphereMesh_jnjxp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wma2s"]
+
+[node name="footballdone" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_hx1wo")
+mesh = SubResource("SphereMesh_jnjxp")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_hx1wo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_wma2s")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

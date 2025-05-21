@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bysjewyshxxdy"]
+
+[ext_resource type="Texture2D" uid="uid://clqer28pl3x6b" path="res://assets/ball volley.jpg" id="1_aqhk5"]
+[ext_resource type="Script" uid="uid://d17pgcm25rhih" path="res://Scripts/level_finished.gd" id="2_uwj2r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6g75k"]
+albedo_texture = ExtResource("1_aqhk5")
+
+[sub_resource type="SphereMesh" id="SphereMesh_7fmex"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g6idy"]
+
+[node name="volleyball" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_6g75k")
+mesh = SubResource("SphereMesh_7fmex")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_uwj2r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_g6idy")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

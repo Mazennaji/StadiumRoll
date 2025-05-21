@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4f7tkbsjw6yi"]
+
+[ext_resource type="Script" uid="uid://dan7n2j4dxfkq" path="res://Scripts/ball.gd" id="1_d60mj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d60mj"]
+rough = true
+absorbent = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d60mj"]
+load_path = "res://.godot/imported/balldimpled.png-3a55ca61ea2604ae89f2454486b475a8.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_376qj"]
+albedo_texture = SubResource("CompressedTexture2D_d60mj")
+
+[sub_resource type="SphereMesh" id="SphereMesh_yk4cr"]
+
+[sub_resource type="GDScript" id="GDScript_ij5cq"]
+script/source = "extends MeshInstance3D
+
+func _ready() -> void:
+	pass
+	
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d60mj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d60mj"]
+font_size = 35
+
+[node name="Ball" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_d60mj")
+script = ExtResource("1_d60mj")
+
+[node name="BallMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_376qj")
+mesh = SubResource("SphereMesh_yk4cr")
+script = SubResource("GDScript_ij5cq")
+
+[node name="BallCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_d60mj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Lives" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+offset_right = 133.0
+grow_vertical = 0
+text = "Lives : 3"
+label_settings = SubResource("LabelSettings_d60mj")

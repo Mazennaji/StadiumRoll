@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://haum6os5suu0"]
+
+[ext_resource type="Script" uid="uid://2t05o6hjyav8" path="res://Scripts/plane_rotation.gd" id="1_kd6nk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wufv0"]
+albedo_color = Color(7.09929e-07, 0.465578, 0.107102, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wufv0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kd6nk"]
+size = Vector3(15, 0.5, 10)
+
+[node name="Stadium" type="StaticBody3D"]
+script = ExtResource("1_kd6nk")
+
+[node name="StadiumMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wufv0")
+mesh = SubResource("BoxMesh_wufv0")
+
+[node name="StadiumCollsion" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kd6nk")

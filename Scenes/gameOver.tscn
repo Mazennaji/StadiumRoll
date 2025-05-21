@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dod6nfhqfusuw"]
+
+[ext_resource type="Script" uid="uid://c1iuem2j3dkod" path="res://Scenes/Play_Button.gd" id="1_houp4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f0bnf"]
+font_size = 100
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 1153.0
+offset_bottom = 648.0
+color = Color(0.137255, 1, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 176.0
+offset_right = 934.0
+offset_bottom = 313.0
+text = "Start the Game"
+label_settings = SubResource("LabelSettings_f0bnf")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 328.0
+offset_right = 805.0
+offset_bottom = 435.0
+theme_override_font_sizes/font_size = 50
+text = "Play"
+script = ExtResource("1_houp4")

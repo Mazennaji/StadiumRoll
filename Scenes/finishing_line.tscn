@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgew76iwa7rgr"]
+
+[ext_resource type="Script" uid="uid://f4ahomshgc5f" path="res://Scripts/finishing_line.gd" id="1_jp85e"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d60mj"]
+load_path = "res://.godot/imported/balldimpled.png-3a55ca61ea2604ae89f2454486b475a8.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6udeb"]
+albedo_texture = SubResource("CompressedTexture2D_d60mj")
+
+[sub_resource type="SphereMesh" id="SphereMesh_x5lqe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6udeb"]
+size = Vector3(1.2, 1.2, 2)
+
+[node name="finishing_line" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_6udeb")
+mesh = SubResource("SphereMesh_x5lqe")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_jp85e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00238037, -0.00537109, -0.0532227)
+shape = SubResource("BoxShape3D_6udeb")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

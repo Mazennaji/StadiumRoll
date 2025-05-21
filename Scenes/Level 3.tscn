@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://btfpipjdqd0hw"]
+
+[ext_resource type="PackedScene" uid="uid://haum6os5suu0" path="res://Scenes/stadium.tscn" id="1_yvlfr"]
+[ext_resource type="Texture2D" uid="uid://dje8cc8uyp6hm" path="res://assets/volleyball court.webp" id="2_eqrfa"]
+[ext_resource type="PackedScene" uid="uid://c0onxhlmisixc" path="res://Scenes/wall.tscn" id="2_js06r"]
+[ext_resource type="PackedScene" uid="uid://c4f7tkbsjw6yi" path="res://Scenes/ball.tscn" id="3_o3aeh"]
+[ext_resource type="PackedScene" uid="uid://bysjewyshxxdy" path="res://Scenes/final_level_volleyball.tscn" id="4_eqrfa"]
+[ext_resource type="Texture2D" uid="uid://clqer28pl3x6b" path="res://assets/ball volley.jpg" id="6_bdpyn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uttew"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_lvv5c"]
+sky_material = SubResource("ProceduralSkyMaterial_uttew")
+
+[sub_resource type="Environment" id="Environment_vgl5k"]
+background_mode = 2
+sky = SubResource("Sky_lvv5c")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2cjm"]
+albedo_texture = ExtResource("2_eqrfa")
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqrfa"]
+albedo_texture = ExtResource("6_bdpyn")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vgl5k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Stadium" parent="." instance=ExtResource("1_yvlfr")]
+transform = Transform3D(0.999666, 0.0180138, -0.0185278, -0.0184872, 0.999498, -0.0257093, 0.0180554, 0.0260433, 0.999498, 0, 0, 0)
+
+[node name="StadiumMesh" parent="Stadium" index="0"]
+material_override = SubResource("StandardMaterial3D_d2cjm")
+
+[node name="StaticBody3D" parent="Stadium" instance=ExtResource("2_js06r")]
+transform = Transform3D(-0.00441023, -0.0184873, 0.999819, -0.025795, 0.999499, 0.0183675, -0.999657, -0.0257093, -0.0048849, -3.60536, 0.747143, -1.44474)
+
+[node name="StaticBody3D2" parent="Stadium" instance=ExtResource("2_js06r")]
+transform = Transform3D(0.144413, -0.0184873, -0.989345, 0.0281134, 0.999499, -0.0145733, 0.989118, -0.0257093, 0.144861, 1.84376, 0.905582, -1.60898)
+
+[node name="StaticBody3D3" parent="Stadium" instance=ExtResource("2_js06r")]
+transform = Transform3D(0.049743, -0.0184873, -0.998591, 0.0266013, 0.999499, -0.0171789, 0.998408, -0.0257093, 0.0502099, 3.35485, 0.737947, 3.4834)
+
+[node name="StaticBody3D4" parent="Stadium" instance=ExtResource("2_js06r")]
+transform = Transform3D(-0.0316542, -0.0184873, -0.999328, 0.0251157, 0.999499, -0.019286, 0.999183, -0.0257093, -0.031174, -4.05794, 0.674105, 3.30913)
+
+[node name="volleyball" parent="Stadium" instance=ExtResource("4_eqrfa")]
+transform = Transform3D(0.999666, -0.0184873, 0.0180554, 0.0180137, 0.999499, 0.0260432, -0.0185278, -0.0257094, 0.999498, -6.4568, 0.771754, 1.0333)
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.941471, 0.337095, 0, -0.337095, 0.941471, 0, 4.53004, 11.2932)
+
+[node name="Ball" parent="." instance=ExtResource("3_o3aeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.90047, 4.74963, 0.128498)
+
+[node name="BallMesh" parent="Ball" index="0"]
+material_override = SubResource("StandardMaterial3D_eqrfa")
+
+[editable path="Stadium"]
+[editable path="Ball"]

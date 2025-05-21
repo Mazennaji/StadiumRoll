@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjv02ec2wxc0k"]
+
+[ext_resource type="PackedScene" uid="uid://haum6os5suu0" path="res://Scenes/stadium.tscn" id="1_lvv5c"]
+[ext_resource type="PackedScene" uid="uid://c4f7tkbsjw6yi" path="res://Scenes/ball.tscn" id="1_uttew"]
+[ext_resource type="PackedScene" uid="uid://c0onxhlmisixc" path="res://Scenes/wall.tscn" id="3_vgl5k"]
+[ext_resource type="PackedScene" uid="uid://dgew76iwa7rgr" path="res://Scenes/finishing_line.tscn" id="4_o30o5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uttew"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_lvv5c"]
+sky_material = SubResource("ProceduralSkyMaterial_uttew")
+
+[sub_resource type="Environment" id="Environment_vgl5k"]
+background_mode = 2
+sky = SubResource("Sky_lvv5c")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o30o5"]
+load_path = "res://.godot/imported/Basketball_Court.webp-3451db42e8e7fab330a0b3bcf888cdd3.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2n4b"]
+albedo_texture = SubResource("CompressedTexture2D_o30o5")
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o30o5"]
+bounce = 0.7
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vgl5k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Stadium" parent="." instance=ExtResource("1_lvv5c")]
+transform = Transform3D(0.999666, 0.0180138, -0.0185278, -0.0184872, 0.999498, -0.0257093, 0.0180554, 0.0260433, 0.999498, 0, 0, 0)
+
+[node name="StadiumMesh" parent="Stadium" index="0"]
+material_override = SubResource("StandardMaterial3D_a2n4b")
+
+[node name="StaticBody3D" parent="Stadium" instance=ExtResource("3_vgl5k")]
+transform = Transform3D(-0.00441023, -0.0184873, 0.999819, -0.025795, 0.999499, 0.0183675, -0.999657, -0.0257093, -0.0048849, -3.60536, 0.747143, -1.44474)
+
+[node name="StaticBody3D2" parent="Stadium" instance=ExtResource("3_vgl5k")]
+transform = Transform3D(0.144413, -0.0184873, -0.989345, 0.0281134, 0.999499, -0.0145733, 0.989118, -0.0257093, 0.144861, 1.84376, 0.905582, -1.60898)
+
+[node name="StaticBody3D3" parent="Stadium" instance=ExtResource("3_vgl5k")]
+transform = Transform3D(0.049743, -0.0184873, -0.998591, 0.0266013, 0.999499, -0.0171789, 0.998408, -0.0257093, 0.0502099, 3.35485, 0.737947, 3.4834)
+
+[node name="StaticBody3D4" parent="Stadium" instance=ExtResource("3_vgl5k")]
+transform = Transform3D(-0.0316542, -0.0184873, -0.999328, 0.0251157, 0.999499, -0.019286, 0.999183, -0.0257093, -0.031174, -4.05794, 0.674105, 3.30913)
+
+[node name="finishing_line" parent="Stadium" instance=ExtResource("4_o30o5")]
+transform = Transform3D(0.999666, -0.0184873, 0.0180554, 0.0180138, 0.999499, 0.0260432, -0.0185278, -0.0257093, 0.999498, -6.95416, 0.771779, 0.26062)
+skeleton = NodePath("../..")
+
+[node name="Ball" parent="." instance=ExtResource("1_uttew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.87394, 7.06469, -0.352171)
+physics_material_override = SubResource("PhysicsMaterial_o30o5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.941471, 0.337095, 0, -0.337095, 0.941471, 0, 4.53004, 11.2932)
+
+[editable path="Stadium"]

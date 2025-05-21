@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://du57hbpmrg8ci"]
+
+[ext_resource type="PackedScene" uid="uid://haum6os5suu0" path="res://Scenes/stadium.tscn" id="1_fmc1q"]
+[ext_resource type="Texture2D" uid="uid://b271xoldlb1yy" path="res://assets/football field.png" id="2_552vg"]
+[ext_resource type="PackedScene" uid="uid://c0onxhlmisixc" path="res://Scenes/wall.tscn" id="2_i7f56"]
+[ext_resource type="PackedScene" uid="uid://c4f7tkbsjw6yi" path="res://Scenes/ball.tscn" id="3_552vg"]
+[ext_resource type="PackedScene" uid="uid://40ic3523l1qr" path="res://Scenes/level_finished_football.tscn" id="4_rxdjg"]
+[ext_resource type="Texture2D" uid="uid://bt1py62604kql" path="res://assets/football ball.jpg" id="6_rxdjg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uttew"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_lvv5c"]
+sky_material = SubResource("ProceduralSkyMaterial_uttew")
+
+[sub_resource type="Environment" id="Environment_vgl5k"]
+background_mode = 2
+sky = SubResource("Sky_lvv5c")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxdjg"]
+albedo_texture = ExtResource("2_552vg")
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m2mxc"]
+albedo_texture = ExtResource("6_rxdjg")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vgl5k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Stadium" parent="." instance=ExtResource("1_fmc1q")]
+transform = Transform3D(0.999666, 0.0180138, -0.0185278, -0.0184872, 0.999498, -0.0257093, 0.0180554, 0.0260433, 0.999498, 0, 0, 0)
+
+[node name="StadiumMesh" parent="Stadium" index="0"]
+material_override = SubResource("StandardMaterial3D_rxdjg")
+
+[node name="StaticBody3D" parent="Stadium" instance=ExtResource("2_i7f56")]
+transform = Transform3D(-0.00441023, -0.0184873, 0.999819, -0.025795, 0.999499, 0.0183675, -0.999657, -0.0257093, -0.0048849, -3.1392, 0.779447, -0.524061)
+
+[node name="StaticBody3D2" parent="Stadium" instance=ExtResource("2_i7f56")]
+transform = Transform3D(0.0664318, -0.0184873, -0.99762, 0.0268848, 0.999499, -0.0167318, 0.997429, -0.0257093, 0.0668962, 2.9856, 0.723502, -3.87147)
+
+[node name="StaticBody3D3" parent="Stadium" instance=ExtResource("2_i7f56")]
+transform = Transform3D(0.049743, -0.0184873, -0.998591, 0.0266013, 0.999499, -0.0171789, 0.998408, -0.0257093, 0.0502099, 3.16389, 0.909072, 3.2108)
+
+[node name="StaticBody3D4" parent="Stadium" instance=ExtResource("2_i7f56")]
+transform = Transform3D(-0.0316542, -0.0184873, -0.999328, 0.0251157, 0.999499, -0.019286, 0.999183, -0.0257093, -0.031174, -3.33838, 0.756074, 1.51895)
+
+[node name="StaticBody3D5" parent="Stadium" instance=ExtResource("2_i7f56")]
+transform = Transform3D(0.0492724, -0.0184873, -0.998614, 0.0265932, 0.999499, -0.0171914, 0.998431, -0.0257094, 0.0497394, -0.743697, 0.843549, 2.33327)
+
+[node name="StaticBody3D6" parent="Stadium" instance=ExtResource("2_i7f56")]
+transform = Transform3D(0.0302589, -0.0184873, 0.999371, -0.0251426, 0.999499, 0.0192508, -0.999226, -0.0257094, 0.0297789, -0.0544406, 0.90508, -2.59773)
+
+[node name="footballdone" parent="Stadium" instance=ExtResource("4_rxdjg")]
+transform = Transform3D(0.999666, -0.0184873, 0.0180554, 0.0180137, 0.999499, 0.0260432, -0.0185278, -0.0257094, 0.999498, 6.29246, 0.771754, -0.164928)
+skeleton = NodePath("../..")
+
+[node name="Ball" parent="." instance=ExtResource("3_552vg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08972, 7.06469, -3.5653)
+
+[node name="BallMesh" parent="Ball" index="0"]
+material_override = SubResource("StandardMaterial3D_m2mxc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.941471, 0.337095, 0, -0.337095, 0.941471, 0, 4.53004, 11.2932)
+
+[editable path="Stadium"]
+[editable path="Ball"]
